@@ -110,8 +110,9 @@ class DaKa(object):
         new_info['szgjcs'] = ""
         
         # 2021.08.05 Fix
-        new_info['23676ad88cb0953fa0e229b32e886f62'] = re.findall(r'"23676ad88cb0953fa0e229b32e886f62":\s*"([^\"]+)",', html)[0]
-        new_info['f6f259ba6791b79b64e0559fbe41050d'] = re.findall(r'"f6f259ba6791b79b64e0559fbe41050d":\s*"([^\"]+)",', html)[0]
+        magics = re.findall(r'"([0-9a-f]{32})":\s*"([^\"]+)"', html)
+        for item in magics:
+            new_info[item[0]] = item[1]
         
         self.info = new_info
         return new_info
